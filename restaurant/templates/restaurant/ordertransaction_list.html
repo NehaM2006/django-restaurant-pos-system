@@ -1,0 +1,39 @@
+{% extends "restaurant/base/base.html" %}
+{% load static %}
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{% static 'restaurant/css/details.css' %}">
+
+        <div class="wrapper">
+            {% include "restaurant/semantics/header.html" %}
+            <div class="row container mt-5 mx-auto details">
+                <div class="col text-center">
+                    <h2 class ="details-header"> Your Order Details</h2>
+                    <div classs="details-content pt-3">
+                        <table class="table table-hover mg-b-0">
+                            <thead>
+                                <tr>
+                                    <th> Meal</th>
+                                    <th> Customer</th>
+                                    <th> Cost</th>
+                                    <th> Status</th>
+                                    <th>Date Ordered</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction  in transactions %}
+                                <tr>
+                                    <td class ="tx-medium td-table">{{ transaction.meal }}</td>
+                                    <td class ="tx-medium td-table">{{ transaction.customer.username }}</td>
+                                    <td class ="tx-medium td-table">{{ transaction.amount }}</td>
+                                    <td class ="tx-medium td-table">{{ transaction.status }}</td>
+                                    <td class ="tx-medium td-table">{{ transaction.created_at }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}

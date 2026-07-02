@@ -1,0 +1,14 @@
+.login-image{
+    height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(14,17,32,0.062),
+            rgba(14,17,32,0.815)
+        ),
+        url("../img/ai-gen-delicious-meal.jpg");
+
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}

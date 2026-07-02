@@ -1,0 +1,35 @@
+{% extends 'restaurant/base/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <link type="text/css" rel="stylesheet" href="{% static 'restaurant/css/login.css' %}">
+    <div  class="wrapper">
+        <div class="row ">
+            <div class="col-9 login-image" style="height: 100vh;">
+                {% include "restaurant/semantics/header.html" %}
+            </div>
+            <div class="col-3 login text-center">
+                <h2 class="mt-5">Login Form</h2>
+                <form class="login-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ login_form|crispy }}
+                    <button type="submit" class="btn btn-dark">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const show = document.querySelector('.show-password');
+        let passwordField= document.querySelector('#password_id');
+
+        show.addEventListener('click', (event) => {
+            if (passwordField.type == 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        });
+    </script>
+{% endblock content %}
