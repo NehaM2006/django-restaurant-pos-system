@@ -5,128 +5,103 @@
   href="{% static 'restaurant/css/index.css' %}"
 />
 <div class="wrapper">
-    {% include 'restaurant/semantics/header.html' %}
-    {% if messages %}
-<div class="container mt-3">
+  {% include 'restaurant/semantics/header.html' %} {% if messages %}
+  <div class="container mt-3">
     {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show shadow" role="alert">
-            {{ message }}
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-        </div>
+    <div
+      class="alert alert-success alert-dismissible fade show shadow"
+      role="alert"
+    >
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
     {% endfor %}
-</div>
-{% endif %}
-    <section class="hero">
+  </div>
+  {% endif %}
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center" style="min-height: 80vh">
+        <div class="col-lg-6">
+          <h1 class="hero-title">Delicious Food Delivered To Your Door 🍔</h1>
 
-        <div class="container">
+          <p class="hero-text mt-4">
+            Fresh ingredients, amazing taste and fast delivery. Order your
+            favourite meals anytime.
+          </p>
 
-            <div class="row align-items-center" style="min-height:80vh;">
-
-                <div class="col-lg-6">
-
-                    <h1 class="hero-title">
-                        Delicious Food Delivered To Your Door 🍔
-                    </h1>
-
-                    <p class="hero-text mt-4">
-
-                        Fresh ingredients, amazing taste and fast delivery.
-
-                        Order your favourite meals anytime.
-
-                    </p>
-
-                    <a href="#menu" class="btn btn-warning btn-lg hero-btn">
-
-                        Order Now
-
-                    </a>
-
-                </div>
-
-                <div class="col-lg-6 text-center">
-
-                    <img src="{% static 'restaurant/img/hero_food.png' %}"
-                        class="img-fluid hero-image">
-
-                </div>
-
-            </div>
-
+          <a href="#menu" class="btn btn-warning btn-lg hero-btn">
+            Order Now
+          </a>
         </div>
 
-    </section>
+        <div class="col-lg-6 text-center">
+          <img
+            src="{% static 'restaurant/img/hero_food.png' %}"
+            class="img-fluid hero-image"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="container text-center mt-5" id="menu">
+    <h2 class="section-title">🍽 Featured Meals</h2>
 
-    <h2 class="section-title">
-        🍽 Featured Meals
-    </h2>
-
-    <p class="section-subtitle">
-        Freshly prepared with premium ingredients
-    </p>
-
-</div>
+    <p class="section-subtitle">Freshly prepared with premium ingredients</p>
+  </div>
   <div class="container search-section">
-
-<form method="GET" class="row g-3 align-items-center">
-
-    <div class="col-lg-5 col-md-12">
+    <form method="GET" class="row g-3 align-items-center">
+      <div class="col-lg-5 col-md-12">
         <input
-            type="text"
-            name="search"
-            class="form-control"
-            placeholder="Search meals..."
-            value="{{ request.GET.search }}">
-    </div>
+          type="text"
+          name="search"
+          class="form-control"
+          placeholder="Search meals..."
+          value="{{ request.GET.search }}"
+        />
+      </div>
 
-    <div class="col-lg-4 col-md-8">
+      <div class="col-lg-4 col-md-8">
         <select name="category" class="form-select">
+          <option value="">All Categories</option>
 
-            <option value="">All Categories</option>
+          {% for category in categories %}
 
-            {% for category in categories %}
+          <option
+            value="{{ category }}"
+            {%
+            if
+            selected_category=""
+            ="category"
+            %}selected{%
+            endif
+            %}
+          >
+            {{ category }}
+          </option>
 
-            <option value="{{ category }}"
-            {% if selected_category == category %}selected{% endif %}>
-                {{ category }}
-            </option>
-
-            {% endfor %}
-
+          {% endfor %}
         </select>
-    </div>
+      </div>
 
-    <div class="col-lg-3 col-md-4">
-        <button class="btn btn-primary w-100">
-            Search
-        </button>
-    </div>
-
-</form>
-
-</div>
+      <div class="col-lg-3 col-md-4">
+        <button class="btn btn-primary w-100">Search</button>
+      </div>
+    </form>
+  </div>
   <div class="container mt-4 mb-4">
-
-    <a href="{% url 'index' %}" class="btn btn-dark me-2 mb-2">
-        All
-    </a>
+    <a href="{% url 'index' %}" class="btn btn-dark me-2 mb-2"> All </a>
 
     {% for category in categories %}
 
-        <a href="{% url 'index' %}?category={{ category }}"
-           class="btn btn-outline-dark me-2 mb-2">
-
-            {{ category }}
-
-        </a>
+    <a
+      href="{% url 'index' %}?category={{ category }}"
+      class="btn btn-outline-dark me-2 mb-2"
+    >
+      {{ category }}
+    </a>
 
     {% endfor %}
-
-</div>
+  </div>
   <div class="index-content mt-5 container mx-auto">
     {% for meal in meals %}
     <div class="row mx-2">
@@ -135,7 +110,7 @@
         <div class="meal-content border mx-2 pb-2">
           <div>
             <a href="{% url 'meal_detail' meal.0.id %}">
-              <img class="meal-image" src="../../media/{{ meal.0.image }}" />
+              <img class="meal-image" src="{{ meal.0.image.url }}" alt="{{ meal.0.name }}">
             </a>
           </div>
           <div class="column text-content px-3">
@@ -153,16 +128,17 @@
               <div class="col order-button-align">
                 <div class="order-button">
                   {% if user.is_authenticated %}
-                        <a href="{% url 'add_to_cart' pk=meal.0.id %}"
-                        class="btn btn-warning fw-bold">
-                            🛒 Add to Cart
-                        </a>
-                    {% else %}
-                        <a href="{% url 'login' %}"
-                        class="btn btn-dark">
-                            Login to Order
-                        </a>
-                    {% endif %}
+                  <a
+                    href="{% url 'add_to_cart' pk=meal.0.id %}"
+                    class="btn btn-warning fw-bold"
+                  >
+                    🛒 Add to Cart
+                  </a>
+                  {% else %}
+                  <a href="{% url 'login' %}" class="btn btn-dark">
+                    Login to Order
+                  </a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -175,7 +151,11 @@
         <div class="meal-content border mx-2 pb-2">
           <div>
             <a href="{% url 'meal_detail' meal.1.id %}">
-              <img class="meal-image" src="../../media/{{ meal.1.image }}" />
+              <img
+                class="meal-image"
+                src="{{ meal.1.image.url }}"
+                alt="{{ meal.1.name }}"
+              />
             </a>
           </div>
           <div class="column text-content px-3">
@@ -193,16 +173,17 @@
               <div class="col order-button-align">
                 <div class="order-button">
                   {% if user.is_authenticated %}
-                        <a href="{% url 'add_to_cart' pk=meal.1.id %}"
-                        class="btn btn-warning fw-bold">
-                            🛒 Add to Cart
-                        </a>
-                    {% else %}
-                        <a href="{% url 'login' %}"
-                        class="btn btn-dark">
-                            Login to Order
-                        </a>
-                    {% endif %}
+                  <a
+                    href="{% url 'add_to_cart' pk=meal.1.id %}"
+                    class="btn btn-warning fw-bold"
+                  >
+                    🛒 Add to Cart
+                  </a>
+                  {% else %}
+                  <a href="{% url 'login' %}" class="btn btn-dark">
+                    Login to Order
+                  </a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -215,7 +196,11 @@
         <div class="meal-content border mx-2 pb-2">
           <div>
             <a href="{% url 'meal_detail' meal.2.id %}">
-              <img class="meal-image" src="../../media/{{ meal.2.image }}" />
+              <img
+                class="meal-image"
+                src="{{ meal.2.image.url }}"
+                alt="{{ meal.2.name }}"
+              />
             </a>
           </div>
           <div class="column text-content px-3">
@@ -232,17 +217,18 @@
               </div>
               <div class="col order-button-align">
                 <div class="order-button">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'add_to_cart' pk=meal.2.id %}"
-                        class="btn btn-warning fw-bold">
-                            🛒 Add to Cart
-                        </a>
-                    {% else %}
-                        <a href="{% url 'login' %}"
-                        class="btn btn-dark">
-                            Login to Order
-                        </a>
-                    {% endif %}
+                  {% if user.is_authenticated %}
+                  <a
+                    href="{% url 'add_to_cart' pk=meal.2.id %}"
+                    class="btn btn-warning fw-bold"
+                  >
+                    🛒 Add to Cart
+                  </a>
+                  {% else %}
+                  <a href="{% url 'login' %}" class="btn btn-dark">
+                    Login to Order
+                  </a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -255,68 +241,41 @@
   </div>
 </div>
 <section class="testimonials">
+  <div class="container">
+    <h2 class="text-center mb-5">What Our Customers Say ❤️</h2>
 
-    <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <h4>Priya</h4>
 
-        <h2 class="text-center mb-5">
-            What Our Customers Say ❤️
-        </h2>
+          <p>⭐⭐⭐⭐⭐</p>
 
-        <div class="row">
-
-            <div class="col-md-4">
-
-                <div class="testimonial-card">
-
-                    <h4>Priya</h4>
-
-                    <p>⭐⭐⭐⭐⭐</p>
-
-                    <p>
-                        Delicious food and super fast delivery.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="testimonial-card">
-
-                    <h4>Rahul</h4>
-
-                    <p>⭐⭐⭐⭐⭐</p>
-
-                    <p>
-                        Beautiful website and amazing food quality.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="testimonial-card">
-
-                    <h4>Ananya</h4>
-
-                    <p>⭐⭐⭐⭐⭐</p>
-
-                    <p>
-                        Definitely ordering again!
-                    </p>
-
-                </div>
-
-            </div>
-
+          <p>Delicious food and super fast delivery.</p>
         </div>
+      </div>
 
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <h4>Rahul</h4>
+
+          <p>⭐⭐⭐⭐⭐</p>
+
+          <p>Beautiful website and amazing food quality.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <h4>Ananya</h4>
+
+          <p>⭐⭐⭐⭐⭐</p>
+
+          <p>Definitely ordering again!</p>
+        </div>
+      </div>
     </div>
-
+  </div>
 </section>
-
 
 {% endblock content %}
