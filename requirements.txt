@@ -12,6 +12,8 @@ idna==3.18
 mysqlclient==2.2.8
 packaging==26.2
 pillow==12.3.0
+psycopg==3.3.4
+psycopg-binary==3.3.4
 python-decouple==3.8
 requests==2.34.2
 six==1.17.0
