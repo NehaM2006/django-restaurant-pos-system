@@ -1,0 +1,32 @@
+.wrapper{
+    min-height:100vh;
+    background:#f8f9fa;
+}
+
+table{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+img{
+    object-fit:cover;
+}
+
+h2{
+    font-weight:bold;
+}
+
+.btn-success{
+    padding:10px 25px;
+    font-weight:600;
+}
+
+.btn-danger{
+    border-radius:8px;
+}
+
+.btn-warning{
+    font-weight:600;
+}
