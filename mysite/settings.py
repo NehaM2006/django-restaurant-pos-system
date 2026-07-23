@@ -41,7 +41,9 @@ if DEBUG:
     for host in ["localhost", "127.0.0.1", "0.0.0.0", "[::1]"]:
         if host not in ALLOWED_HOSTS:
             ALLOWED_HOSTS.append(host)
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://django-restaurant-system.onrender.com",
+]
 
 # Application definition
 
