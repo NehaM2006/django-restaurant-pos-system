@@ -18,8 +18,10 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib import messages
 
+from django.http import HttpResponseNotFound
+
 def error_404_view(request, exception):
-    return redirect("index")
+    return HttpResponseNotFound("404 Page Not Found")
 # Create your views here.
 class IndexView(View):
 
