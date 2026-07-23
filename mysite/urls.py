@@ -29,6 +29,6 @@ urlpatterns = [
 ]
 if settings.DEBUG:
      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-#urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='restaurant/robots.txt', content_type='text/plain'))]
+urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='restaurant/robots.txt', content_type='text/plain'))]
 
 handler404 = 'restaurant.views.error_404_view'

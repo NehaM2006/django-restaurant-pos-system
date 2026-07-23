@@ -17,11 +17,11 @@ from django.db.models import Sum, Count, Avg
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib import messages
-
-from django.http import HttpResponseNotFound
+from django.shortcuts import redirect
 
 def error_404_view(request, exception):
-    return HttpResponseNotFound("404 Page Not Found")
+    return redirect("index")
+
 # Create your views here.
 class IndexView(View):
 
