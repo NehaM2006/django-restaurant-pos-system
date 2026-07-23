@@ -14,6 +14,9 @@ from pathlib import Path
 from decouple import config
 import os
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 def get_bool(name, default=False):
     value = config(name, default=default)
@@ -54,6 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary",
+    "cloudinary_storage",
     "restaurant",
     "contact",
     "crispy_forms",
@@ -160,8 +165,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 LOGIN_URL="/login/"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -182,3 +186,6 @@ SECURE_HSTS_PRELOAD = get_bool("SECURE_HSTS_PRELOAD", default=False)
 SECURE_BROWSER_XSS_FILTER = get_bool("SECURE_BROWSER_XSS_FILTER", default=False)
 SECURE_CONTENT_TYPE_NOSNIFF = get_bool("SECURE_CONTENT_TYPE_NOSNIFF", default=False)
 X_FRAME_OPTIONS = config("X_FRAME_OPTIONS", default="DENY")
+cloudinary.config(
+    secure=True
+)
