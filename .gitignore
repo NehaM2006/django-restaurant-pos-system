@@ -1,92 +1,26 @@
-tempCodeRunnerFile.py
-## General Python ignores
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
+*.pyo
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-*.egg
-MANIFEST
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py.cover
-.hypothesis/
-.pytest_cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Django stuff
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Environments
-.env
-.envrc
-.venv
-env/
+# Virtual Environment
 venv/
-ENV/
-env.bak/
-venv.bak/
+env/
 
-# IDEs and editors
-.idea/
-.vscode/
+# Django
+*.log
+db.sqlite3
 
-# Temporary files
-tempCodeRunnerFile.py
-*.pyc
-
-# Static/media
+# Media (optional)
 media/
 
-# Misc
-.ruff_cache/
-.pypirc
+# IDE
+.vscode/
+.idea/
 
-# Keep other generated or tool-specific directories ignored as needed
-.pixi
-.pdm-python
-.pdm-build/
-__pypackages__/
-celerybeat-schedule
-celerybeat.pid
-*.rdb
-*.aof
-.pytest_cache/
-.mypy_cache/
-.pyre/
-.pytype/
-cython_debug/
-.pypirc
+# OS
+.DS_Store
+Thumbs.db
 
-# End of .gitignore
+# Environment
+.env

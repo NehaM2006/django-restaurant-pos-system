@@ -17,6 +17,9 @@
                                     <th> Cost</th>
                                     <th> Status</th>
                                     <th>Date Ordered</th>
+                                    <th>Quantity</th>
+
+                                    <th>Payment</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,8 +28,35 @@
                                     <td class ="tx-medium td-table">{{ transaction.meal }}</td>
                                     <td class ="tx-medium td-table">{{ transaction.customer.username }}</td>
                                     <td class ="tx-medium td-table">{{ transaction.amount }}</td>
-                                    <td class ="tx-medium td-table">{{ transaction.status }}</td>
+                                    <td>
+
+                                    {% if transaction.status == "Pending" %}
+                                    <span class="badge bg-warning text-dark">
+                                    🟡 Pending
+                                    </span>
+
+                                    {% elif transaction.status == "Preparing" %}
+                                    <span class="badge bg-info">
+                                    👨‍🍳 Preparing
+                                    </span>
+
+                                    {% elif transaction.status == "Out for Delivery" %}
+                                    <span class="badge bg-primary">
+                                    🚚 Out for Delivery
+                                    </span>
+
+                                    {% elif transaction.status == "Delivered" %}
+                                    <span class="badge bg-success">
+                                    ✅ Delivered
+                                    </span>
+
+                                    {% endif %}
+
+                                    </td>
                                     <td class ="tx-medium td-table">{{ transaction.created_at }}</td>
+                                    <td>{{ transaction.quantity }}</td>
+
+                                    <td>{{ transaction.payment_method }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

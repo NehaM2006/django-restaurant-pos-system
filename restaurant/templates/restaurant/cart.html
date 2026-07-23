@@ -1,0 +1,117 @@
+{% extends "restaurant/base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'restaurant/css/cart.css' %}">
+
+<div class="wrapper">
+
+    {% include "restaurant/semantics/header.html" %}
+
+    <div class="container mt-5">
+
+        <h2 class="text-center mb-4">🛒 My Cart</h2>
+
+        {% if cart_items %}
+
+        <table class="table table-bordered table-hover align-middle text-center">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Meal</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for item in cart_items %}
+
+                <tr>
+
+                    <td>
+                        <img src="{{ item.meal.image.url }}"
+                             width="90"
+                             height="70"
+                             class="rounded">
+                    </td>
+
+                    <td>{{ item.meal.name }}</td>
+
+                    <td>${{ item.meal.price }}</td>
+
+                  <td>
+
+                        <a href="{% url 'decrease_quantity' item.id %}"
+                        class="btn btn-outline-danger btn-sm">
+                            -
+                        </a>
+
+                        <span class="mx-2 fw-bold">
+                            {{ item.quantity }}
+                        </span>
+
+                        <a href="{% url 'increase_quantity' item.id %}"
+                        class="btn btn-outline-success btn-sm">
+                            +
+                        </a>
+
+                    </td>
+
+                    <td>
+                        ${{ item.subtotal }}
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'remove_cart' item.id %}"
+                           class="btn btn-danger btn-sm">
+                            Remove
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="text-end">
+
+            <h3>Total : ${{ total }}</h3>
+
+            <a href="{% url 'checkout' %}"
+            class="btn btn-warning btn-lg mt-3">
+                Proceed to Checkout
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="text-center">
+
+            <h3>Your cart is empty.</h3>
+
+            <a href="{% url 'index' %}"
+               class="btn btn-warning mt-3">
+                Continue Shopping
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,14 +1,112 @@
-.login-image{
-    height: 100vh;
+.login-page{
+
+    min-height:100vh;
 
     background:
-        linear-gradient(
-            rgba(14,17,32,0.062),
-            rgba(14,17,32,0.815)
-        ),
-        url("../img/ai-gen-delicious-meal.jpg");
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("../img/hero_gen_ai.jpg");
 
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+.login-card{
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:25px;
+
+    padding:45px;
+
+    color:white;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+    animation:fadeUp 0.8s ease;
+
+}
+
+.login-card h1{
+
+    font-weight:700;
+
+}
+
+.form-control{
+
+    border-radius:30px;
+
+    padding:14px;
+
+    border:none;
+
+}
+
+.form-control:focus{
+
+    box-shadow:0 0 15px rgba(255,193,7,.6);
+
+}
+
+.login-btn{
+
+    background:linear-gradient(45deg,#ff9800,#ffc107);
+
+    color:black;
+
+    font-weight:bold;
+
+    border-radius:30px;
+
+    padding:12px;
+
+    transition:.3s;
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(255,193,7,.4);
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+@media(max-width:768px){
+
+.login-card{
+
+    padding:30px;
+
+}
+
+.login-card h1{
+
+    font-size:30px;
+
+}
+
 }

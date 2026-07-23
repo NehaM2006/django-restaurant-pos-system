@@ -1,0 +1,1 @@
+web: gunicorn django-restaurant-pos-system.wsgi
