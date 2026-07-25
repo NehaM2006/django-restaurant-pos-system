@@ -195,3 +195,8 @@ X_FRAME_OPTIONS = config("X_FRAME_OPTIONS", default="DENY")
 cloudinary.config(
     secure=True
 )
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'nblisejz',
+    'API_KEY': '875476519454582',
+    'API_SECRET': '92OpDDbLG-fya2Xo7eZIfpuoZdo',
+}
